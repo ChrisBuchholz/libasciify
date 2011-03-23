@@ -3,9 +3,9 @@ CFLAGS=-g -Wall -I ../src
 
 all: main
 
-main: src/main.cc ../build/libasciify.o
+main: src/main.cc ../src/libasciify.o
 	mkdir -p build/
-	$(CC) $(CFLAGS) src/main.cc ../build/libasciify.o -o build/main
+	$(CC) $(CFLAGS) src/main.cc ../src/libasciify.o -o build/main
 
 .PHONY: clean
 
