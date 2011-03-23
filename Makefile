@@ -1,13 +1,12 @@
 CC=g++
-CFLAGS=-g -Wall
+CFLAGS=-g -Wall -c
 
 all: libasciify
 
 libasciify: src/libasciify.cc
-	mkdir -p build/
-	$(CC) $(CFLAGS) -c src/libasciify.cc -o build/libasciify.o
+	$(CC) $(CFLAGS) src/libasciify.cc -o src/libasciify.o
 
 .PHONY: clean
 
 clean:
-	rm -rfv build/
+	rm -fv src/libasciify.o
