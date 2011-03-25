@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-g -Wall -I ../src
+CFLAGS=-g -Wall -I ../src -L/usr/X11R6/lib -lm -lpthread -lX11
 
 all: main
 

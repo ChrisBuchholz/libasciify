@@ -6,13 +6,13 @@
 
 class libasciify {
     public:
-        libasciify(std::string);
-        // container of ascii
+        libasciify(char*);
+        // ascii string
         std::string ascii_str;
 
     protected:
-        std::vector<std::string> greyscale_chars;
-        std::vector<int> greyscale_bounds;
+        std::vector<std::string> grayscale_chars;
+        std::vector<int> grayscale_bounds;
 };
 
 #endif
