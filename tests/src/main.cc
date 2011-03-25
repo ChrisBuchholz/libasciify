@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
         
         libasciify l(image_file);
         std::ofstream file(ascii_file.c_str());
-        file << l.ascii_str;
+        file << l.getAscii();
         file.close();
     }
 	return 0;

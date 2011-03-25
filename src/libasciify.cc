@@ -8,6 +8,9 @@
 using namespace cimg_library;
 
 libasciify::libasciify(std::string filename) {
+    // set is_processing to on before we continue
+    this->is_processing = true;
+
     // create a map that defines tonal-level=>character
     // for the pixel conversion
     // this map corresponds to a grayscale image, not color
@@ -35,20 +38,25 @@ libasciify::libasciify(std::string filename) {
     // basewidth is of the original width,
     // and then multiplying the original
     // height by that percentage
-    int basewidth = 96;
-    float wpercent = basewidth / (float)image.width();
-    int hsize = (float)image.height() * wpercent;
-    image.resize(basewidth, hsize);
+    int width = 96;
+    float wpercent = width / (float)image.width();
+    int height = (float)image.height() * wpercent;
+    image.resize(width, height);
+
+    int x = 0,
+        y = 0;
 
     // iterate over each vertical line in the image
-    for(int h = 0; h < hsize; h++) {
+    for(y = 0; y < height; y++) {
+        this->updateProgress(width, height, x, y);
         // iterator over each pixel in the horizontal line 
-        for(int w = 0; w < basewidth; w++) {
+        for(x = 0; x < width; x++) {
+            this->updateProgress(width, height, x, y);
             // cimg object operator returns pixel value
             // located a x, y, z, v
-            int r = (int)image(h, w, 0, 0),
-                g = (int)image(h, w, 0, 1),
-                b = (int)image(h, w, 0, 2);
+            int r = (int)image(y, x, 0, 0),
+                g = (int)image(y, x, 0, 1),
+                b = (int)image(y, x, 0, 2);
 
             //float bw = (r+g+b)/3; // simple but not as precise
             float bw = (r * 0.30) + (g * 0.59) + (b + 0.11);
@@ -65,4 +73,33 @@ libasciify::libasciify(std::string filename) {
 
     // set public member ascii string
     this->ascii_str = str;
+
+    // set is_processing to false because it's done
+    this->is_processing = false;
+}
+
+std::string libasciify::getAscii() {
+    // returns the ascii string
+    return this->ascii_str;
+}
+
+bool libasciify::isProcessing() {
+    // return true if progress is running
+    // false if not
+    return this->is_processing;
+}
+
+void libasciify::updateProgress(int width, int height, int x, int y) {
+    // calculate the process' progress by comparing
+    // width and height (number of pixels) with x and y (how many pixels
+    // has been processed)
+    int total = width * height,
+        current = x * y,
+        progress = current * 100 / total;
+    this->current_progress = progress;
+}
+
+int libasciify::getProgress() {
+    // return current progress
+    return this->current_progress;
 }
