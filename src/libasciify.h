@@ -6,7 +6,7 @@
 
 class libasciify {
     public:
-        libasciify(char*);
+        libasciify(std::string);
         // ascii string
         std::string ascii_str;
 

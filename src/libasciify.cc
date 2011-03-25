@@ -2,11 +2,12 @@
 #include "CImg.h"
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <map>
 
 using namespace cimg_library;
 
-libasciify::libasciify(char* filename) {
+libasciify::libasciify(std::string filename) {
     // create a map that defines tonal-level=>character
     // for the pixel conversion
     // this map corresponds to a grayscale image, not color
@@ -24,8 +25,8 @@ libasciify::libasciify(char* filename) {
     std::string str;
 
     // load image into cimg object
-    CImg<unsigned char> image(filename); // CImg depends on Imagemagick for
-                                         // loading some image types
+    CImg<unsigned char> image(filename.c_str()); // CImg depends on Imagemagick for
+                                                 // loading some image types
 
     // scale image to thumbnail size
     // 96px in height
