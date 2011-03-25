@@ -38,7 +38,7 @@ libasciify::libasciify(std::string filename) {
     // this map corresponds to a grayscale image, not color
     std::map<int, char> grayscale_table;
     std::map<int, char>::iterator grayscale_pick;
-    grayscale_table[0] = ' ';
+    grayscale_table[0] = '_';
     grayscale_table[15] = '.';
     grayscale_table[30] = ',';
     grayscale_table[60] = ';';
@@ -81,17 +81,21 @@ libasciify::libasciify(std::string filename) {
                 b = (int)image(y, x, 0, 2);
 
             //float bw = (r+g+b)/3; // simple but not as precise
-            float bw = (r * 0.3) + (g * 0.59) + (b + 0.11);
-            
+            float bw = (r * 0.30) + (g * 0.59) + (b * 0.11);
+
             // pick the horse, dumb dumb
-            grayscale_pick = grayscale_table.upper_bound(bw);
+            grayscale_pick = grayscale_table.lower_bound(bw);
 
             // second as in value (key=>value)
             str += (*grayscale_pick).second;
+
         }
         // newline
         str += "\n";
     }
+    
+    // release memory
+    //grayscale_table.erase(grayscale_pick);
 
     // set public member ascii string
     this->ascii_str = str;
