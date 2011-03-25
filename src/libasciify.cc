@@ -38,13 +38,14 @@ libasciify::libasciify(std::string filename) {
     // this map corresponds to a grayscale image, not color
     std::map<int, char> grayscale_table;
     std::map<int, char>::iterator grayscale_pick;
+    grayscale_table[0] = ' ';
     grayscale_table[15] = '.';
     grayscale_table[30] = ',';
     grayscale_table[60] = ';';
     grayscale_table[100] = 'j';
     grayscale_table[160] = 'E';
     grayscale_table[210] = 'W';
-    grayscale_table[250] = 'K';
+    grayscale_table[255] = 'K';
     
     // initiate string
     std::string str;
@@ -70,8 +71,7 @@ libasciify::libasciify(std::string filename) {
 
     // iterate over each vertical line in the image
     for(y = 0; y < height; y++) {
-        this->updateProgress(width, height, x, y);
-        // iterator over each pixel in the horizontal line 
+        // iterate over each pixel in the horizontal line 
         for(x = 0; x < width; x++) {
             this->updateProgress(width, height, x, y);
             // cimg object operator returns pixel value
@@ -84,7 +84,7 @@ libasciify::libasciify(std::string filename) {
             float bw = (r * 0.3) + (g * 0.59) + (b + 0.11);
             
             // pick the horse, dumb dumb
-            grayscale_pick = grayscale_table.lower_bound(bw);
+            grayscale_pick = grayscale_table.upper_bound(bw);
 
             // second as in value (key=>value)
             str += (*grayscale_pick).second;
