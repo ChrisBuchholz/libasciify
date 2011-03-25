@@ -76,9 +76,9 @@ libasciify::libasciify(std::string filename) {
             this->updateProgress(width, height, x, y);
             // cimg object operator returns pixel value
             // located a x, y, z, v
-            int r = (int)image(y, x, 0, 0),
-                g = (int)image(y, x, 0, 1),
-                b = (int)image(y, x, 0, 2);
+            int r = (int)image(x, y, 0, 0),
+                g = (int)image(x, y, 0, 1),
+                b = (int)image(x, y, 0, 2);
 
             //float bw = (r+g+b)/3; // simple but not as precise
             float bw = (r * 0.30) + (g * 0.59) + (b * 0.11);
