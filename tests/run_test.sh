@@ -22,6 +22,7 @@ echo -e "running libasciify tests\n"
 
 make
 
-./build/main man_face.jpg
+./build/main man.jpg
+./build/main jonas.png
 
 echo -e "\n--------------------\ntests done"
