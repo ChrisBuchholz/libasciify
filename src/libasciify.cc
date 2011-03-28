@@ -30,6 +30,17 @@
 using namespace cimg_library;
 
 libasciify::libasciify(std::string filename) {
+    this->filename = filename;
+    this->process(false);
+}
+
+libasciify::libasciify(std::string filename, Monitor *callee) {
+    this->m_callee = callee;
+    this->filename = filename;
+    this->process(true);
+}
+
+void libasciify::process(bool isMonitoring) {
     // set is_processing to on before we continue
     this->is_processing = true;
 
@@ -51,8 +62,8 @@ libasciify::libasciify(std::string filename) {
     std::string str;
 
     // load image into cimg object
-    CImg<unsigned char> image(filename.c_str()); // CImg depends on Imagemagick for
-                                                 // loading some image types
+    CImg<unsigned char> image(this->filename.c_str()); // CImg depends on Imagemagick for
+                                                       // loading some image types
 
     // scale image to thumbnail size
     // 96px in height
@@ -73,7 +84,12 @@ libasciify::libasciify(std::string filename) {
     for(y = 0; y < height; y++) {
         // iterate over each pixel in the horizontal line 
         for(x = 0; x < width; x++) {
-            this->updateProgress(width, height, x, y);
+            // if isMonitoring true, call the
+            // update-progressor function
+            /*if(isMonitoring) {
+                this->updateProgress(width, height, x, y);
+            }*/
+
             // cimg object operator returns pixel value
             // located a x, y, z, v
             int r = (int)image(x, y, 0, 0),
@@ -119,10 +135,13 @@ void libasciify::updateProgress(int width, int height, int x, int y) {
     // calculate the process' progress by comparing
     // width and height (number of pixels) with x and y (how many pixels
     // has been processed)
+    width = width - 1;
+    height = height - 1;
     int total = width * height,
-        current = x * y,
-        progress = current * 100 / total;
-    this->current_progress = progress;
+        current = x + (y * width),
+        overall = current * 100 / total;
+    this->current_progress = overall;
+    //this->callee->update(overall);
 }
 
 int libasciify::getProgress() {

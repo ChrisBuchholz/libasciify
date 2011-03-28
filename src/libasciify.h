@@ -26,21 +26,29 @@
 #include <iostream>
 #include <vector>
 
+class Monitor {
+    public:
+        virtual void update(int) = 0;
+};
+
 class libasciify {
     public:
         libasciify(std::string);
+        libasciify(std::string, Monitor*);
         std::string getAscii();
         bool isProcessing();
         int getProgress();
 
     protected:
+        Monitor *m_callee;
+        std::string filename;
+        void process(bool);
         void updateProgress(int, int, int, int);
         std::vector<std::string> grayscale_chars;
         std::vector<int> grayscale_bounds;
         std::string ascii_str;
         bool is_processing;
         int current_progress; // percentage
-
 };
 
 #endif
