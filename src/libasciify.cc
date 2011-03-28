@@ -30,11 +30,13 @@
 using namespace cimg_library;
 
 libasciify::libasciify(std::string filename) {
+    this->current_progress = 0;
     this->filename = filename;
     this->process(false);
 }
 
 libasciify::libasciify(std::string filename, Monitor *callee) {
+    this->current_progress = 0;
     this->m_callee = callee;
     this->filename = filename;
     this->process(true);
@@ -86,9 +88,9 @@ void libasciify::process(bool isMonitoring) {
         for(x = 0; x < width; x++) {
             // if isMonitoring true, call the
             // update-progressor function
-            /*if(isMonitoring) {
+            if(isMonitoring) {
                 this->updateProgress(width, height, x, y);
-            }*/
+            }
 
             // cimg object operator returns pixel value
             // located a x, y, z, v
@@ -141,7 +143,7 @@ void libasciify::updateProgress(int width, int height, int x, int y) {
         current = x + (y * width),
         overall = current * 100 / total;
     this->current_progress = overall;
-    //this->callee->update(overall);
+    this->m_callee->update(overall);
 }
 
 int libasciify::getProgress() {
