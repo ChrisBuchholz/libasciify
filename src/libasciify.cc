@@ -51,14 +51,16 @@ void libasciify::process(bool isMonitoring) {
     // this map corresponds to a grayscale image, not color
     std::map<int, char> grayscale_table;
     std::map<int, char>::iterator grayscale_pick;
-    grayscale_table[0] = '_';
-    grayscale_table[15] = '.';
-    grayscale_table[30] = ',';
-    grayscale_table[60] = ';';
-    grayscale_table[100] = 'j';
-    grayscale_table[160] = 'E';
-    grayscale_table[210] = 'W';
-    grayscale_table[255] = 'K';
+    grayscale_table[0] = ' ';
+    grayscale_table[28] = '.';
+    grayscale_table[56] = '^';
+    grayscale_table[84] = '-';
+    grayscale_table[114] = '|';
+    grayscale_table[142] = '+';
+    grayscale_table[170] = '=';
+    grayscale_table[198] = 'O';
+    grayscale_table[226] = '@';
+    grayscale_table[255] = '#';
     
     // initiate string
     std::string str;
