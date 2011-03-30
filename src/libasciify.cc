@@ -52,6 +52,15 @@ void libasciify::process(bool isMonitoring) {
     std::map<int, char> grayscale_table;
     std::map<int, char>::iterator grayscale_pick;
     grayscale_table[0] = ' ';
+    grayscale_table[25] = '.';
+    grayscale_table[50] = '-';
+    grayscale_table[100] = '+';
+    grayscale_table[150] = '=';
+    grayscale_table[190] = '0';
+    grayscale_table[220] = '@';
+    grayscale_table[255] = '#';
+
+    /*grayscale_table[0] = ' ';
     grayscale_table[28] = '.';
     grayscale_table[56] = '^';
     grayscale_table[84] = '-';
@@ -60,8 +69,8 @@ void libasciify::process(bool isMonitoring) {
     grayscale_table[170] = '=';
     grayscale_table[198] = 'O';
     grayscale_table[226] = '@';
-    grayscale_table[255] = '#';
-    
+    grayscale_table[255] = '#';*/
+
     // initiate string
     std::string str;
 

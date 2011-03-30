@@ -17,7 +17,7 @@
 ##      ChrisBuchholz <http://chrisbuchholz.dk>
 
 CC=g++
-CFLAGS=-g -Wall -I../src -L/usr/X11R6/lib -lm -lpthread -lX11
+CFLAGS=-g -Wall -I ../src -L /usr/X11R6/lib -lm -l pthread -l X11
 
 all: main
 
