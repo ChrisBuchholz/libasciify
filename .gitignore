@@ -1,2 +1,2 @@
 tests/build
-*.o
+src/libasciify.o
