@@ -16,7 +16,7 @@
 ## along with libasciify. If not, see <http://www.gnu.org/licenses/>.
 
 ## authors:
-##      ChrisBuchholz <http://chrisbuchholz.dk>
+##      ChrisBuchholz <http://chrisbuchholz.me/>
 
 echo -e "running libasciify tests\n"
 

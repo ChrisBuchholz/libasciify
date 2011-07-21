@@ -17,7 +17,7 @@
 
 /**
   * authors:
-  *     ChrisBuchholz <http://chrisbuchholz.dk>
+  *     ChrisBuchholz <http://chrisbuchholz.me/>
   **/
 
 #include "libasciify.h"
