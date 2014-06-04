@@ -20,7 +20,7 @@
   *     ChrisBuchholz <http://chrisbuchholz.me>
   **/
 
-#include "libasciify.h"
+                                    #include "libasciify.h"
 #include "CImg.h"
 #include <iostream>
 #include <string>
